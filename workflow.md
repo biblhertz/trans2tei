@@ -3,7 +3,7 @@
 ### Prerequisites
 In order to extract text and structure from a printed book you need a digitized scan of the pages of the book, possibly with 300dpi+ resolution and little to no compression. 
 Transkribus server prefer jpg to hires tiff: same computation-wise quality with less filesize. If you have tiff, convert them to jpg with no change in dimensions and 9-10 (90%-100%) quality (i.e. little compression).
-###Visual analysis
+### Visual analysis
 In order to decode the structure it could be lovely to have some kind of standard references for book page structures. @liladude should create some basic structure standards for P2PLa.
 ### Creating the project on Transkribus
 Create a new document in Transkribus by uploading the images and filing the needed metadata.
@@ -12,7 +12,7 @@ Create a new document in Transkribus by uploading the images and filing the need
   - paragraphs are detected and inserted in separated regions
   - paragraphs are not in separated regions 
     - manually create the paragraph regions
-    - train a model with the new layout @liladude check with team if this is possible
+    - train a model with the new layout @me check with team if this is possible
 2. Run line detection
 3. Recognize text (some pages) in order get some basic text for creating the new training
 ### Text and character styles 
