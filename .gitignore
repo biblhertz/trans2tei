@@ -1,8 +1,8 @@
 .idea/
 .DS_Store
 __pycache__/
-raffaello/temp/
-raffaello/venv/
-raffaello/saxon-he-10.5.jar
-raffaello/export_job_*/
-raffaello/no-outfile-specified.xml
+temp/
+venv/
+saxon-he-10.5.jar
+export_job_*/
+no-outfile-specified.xml
