@@ -1,12 +1,14 @@
 import subprocess
 
+SAXON_JAR = "saxon-he-10.5.jar"
+
 
 def base(xml_data, stylesheet):
     # java -jar saxon9he.jar -xsl:collect-blocks.xsl converted_body1.xml > converted_body.xml
     # output = subprocess.check_output(["java", "-jar", "saxon-he-10.5.jar", "-xsl:{}".format(stylesheet), infile])
     # return output.decode()
 
-    command = ["java", "-jar", "saxon-he-10.5.jar", "-xsl:{}".format(stylesheet), "-s:-"]
+    command = ["java", "-jar", SAXON_JAR, "-xsl:{}".format(stylesheet), "-s:-"]
     p = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     output = p.communicate(input=xml_data.encode())[0]
     return output.decode()
@@ -14,7 +16,7 @@ def base(xml_data, stylesheet):
 
 def page2tei(input_file):
     stylesheet = "xslt/page2tei-0.xsl"
-    command = ["java", "-jar", "saxon-he-10.5.jar", "-xsl:{}".format(stylesheet), "-s:{}".format(input_file)]
+    command = ["java", "-jar", SAXON_JAR, "-xsl:{}".format(stylesheet), "-s:{}".format(input_file)]
     p = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     output = p.communicate()[0]
     return output.decode()
