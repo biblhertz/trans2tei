@@ -61,12 +61,11 @@ if __name__ == '__main__':
     xml_data = replacements.tabs(xml_data)
     print(xml_data, file=open("temp/tab.xml", 'w'))
 
+    xml_data = transform.join_paragraphs(xml_data)
+    print(xml_data, file=open("temp/rep1.xml", "w"))
+
     xml_data = replacements.replace_hyphens(xml_data)
     print(xml_data, file=open("temp/hyph.xml", 'w'))
-
-    print(xml_data, file=open("temp/rep1.xml", "w"))
-    xml_data = transform.join_paragraphs(xml_data)
-
     # TODO tabs
 
     with open(args.outfile_name, "w") as outfile:
