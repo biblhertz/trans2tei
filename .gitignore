@@ -6,3 +6,4 @@ venv/
 saxon-he-10.5.jar
 export_job_*/
 no-outfile-specified.xml
+exports/*/page/
