@@ -8,6 +8,34 @@ def replace_hyphens(xml_data, language="any"):
                   r'-\1\2<lb break="no" rend="nohyphen" \3\4',
                   xml_data)
 
+    # Words with hyphens from a whitelist
+    with open("language_data/hyphen-words.txt", "r") as f:
+        words = f.read().splitlines()
+    f.close()
+
+    to_replace = []
+    # Collect hyphened words
+    # hyphened = re.findall(r"\w+¬\s*<lb [^<>]+>\w+", xml_data)
+    hyphened = re.findall(r"\w+¬\s*(?:<pb [^<>]+>)?\s*<lb [^<>]+>\w+", xml_data)
+    if hyphened:
+        for h in hyphened:
+            if "<pb" in hyphened:
+                # Hyphens over pagebreaks
+                simplified = re.sub(r"¬\s*(<pb [^<>]+>)\s*<lb [^<>]+>", "-", h)
+                if simplified in words or simplified.lower() in words:
+                    replacement = re.sub(r"¬\s*<pb ([^<>]+>)\s*<lb ([^<>]+)>",
+                                         r'-<pb break="no" rend="nohyphen" \1><lb break="no" rend="nohyphen" \2>', h)
+                    to_replace.append((h, replacement))
+            else:
+                # Hyphens over lines
+                simplified = re.sub(r"¬\s*<lb [^<>]+>", "-", h)
+                if simplified in words or simplified.lower() in words:
+                    replacement = re.sub(r"¬\s*<lb ([^<>]+)>", r'-<lb break="no" rend="nohyphen" \1>', h)
+                    to_replace.append((h, replacement))
+    # Replace with normal hyphens
+    for hyphen, replacement in to_replace:
+        xml_data = xml_data.replace(hyphen, replacement)
+
     # Collect words
     if language == "de":
         with open("language_data/de.txt", "r") as f:
@@ -36,16 +64,13 @@ def replace_hyphens(xml_data, language="any"):
                 unhyphened = re.sub(r"¬\s*(<pb [^<>]+>)\s*<lb [^<>]+>", "", h)
                 if unhyphened in words or unhyphened.lower() in words:
                     replacement = re.sub(r"¬\s*<pb ([^<>]+>)\s*<lb ([^<>]+)>", r'<pb break="no" rend="hyphen" \1><lb break="no" rend="nohyphen" \2>', h)
-
                     to_replace.append((h, replacement))
             else:
                 # Hypens over lines
                 unhyphened = re.sub(r"¬\s*<lb [^<>]+>", "", h)
                 if unhyphened in words or unhyphened.lower() in words:
                     replacement = re.sub(r"¬\s*<lb ([^<>]+)>", r'<lb break="no" rend="hyphen" \1>', h)
-
                     to_replace.append((h, replacement))
-
     # Replace hyphens
     for hyphen, replacement in to_replace:
         xml_data = xml_data.replace(hyphen, replacement)
