@@ -37,6 +37,11 @@ def move_footnotes(xml_data):
     return base(xml_data, stylesheet)
 
 
+def disconnect_style_and_type(xml_data):
+    stylesheet = "xslt/disconnect-style-and-type.xsl"
+    return base(xml_data, stylesheet)
+
+
 def collect_blocks(xml_data):
     stylesheet = "xslt/collect-blocks.xsl"
     return base(xml_data, stylesheet)

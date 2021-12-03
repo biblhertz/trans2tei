@@ -11,39 +11,84 @@
     </xsl:template>
 
     <xsl:template match="tei:div">
-        <div>
-            <!-- head and form work -->
-            <xsl:apply-templates select="tei:fw[not(preceding-sibling::tei:p)] | tei:pb[not(preceding-sibling::tei:p)] | tei:head[not(preceding-sibling::tei:p)]"/>
+        <xsl:copy>
+            <!-- keep attributes -->
+            <xsl:apply-templates select="@*"/>
 
-            <!-- abstract -->
-            <argument>
-                <xsl:apply-templates select="tei:p[@type='abstract']"/>
-            </argument>
-
-            <!-- body -->
-            <floatingText>
-                <xsl:apply-templates select="tei:p[not(@type)] | tei:p[@type='paragraph'] | tei:p[@type='first'] | tei:p[@type='paragraph-first'] | tei:p[@type='paragraph-noindent'] | tei:p[@type='paragraph-center'] | tei:p[@type='paragraph-right']"/>
-            </floatingText>
-
-            <!-- archival notice -->
-            <msDesc>
-                <xsl:apply-templates select="tei:p[@type='archival-notice']"/>
-            </msDesc>
-
-            <!-- commentary -->
-            <note type="commentary">
-                <xsl:apply-templates select="tei:p[@type='commentary'] | tei:p[@type='commentary-first'] | tei:p[@type='commentary-noindent']"/>
-            </note>
-
-            <!-- bibliography -->
-            <bibl>
-                <xsl:apply-templates select="tei:p[@type='bibliography']"/>
-            </bibl>
-
-
-        </div>
+            <xsl:for-each-group select="*" group-adjacent="name()">
+                <xsl:choose>
+                    <xsl:when test="name()='pAbstract'">
+                        <argument>
+                            <xsl:for-each select="current-group()">
+                                <xsl:apply-templates select="."/>
+                            </xsl:for-each>
+                        </argument>
+                    </xsl:when>
+                    <xsl:when test="name()='pOrig'">
+                        <quote type="original">
+                            <xsl:for-each select="current-group()">
+                                <xsl:apply-templates select="."/>
+                            </xsl:for-each>
+                        </quote>
+                    </xsl:when>
+                    <xsl:when test="name()='pArchival'">
+                        <msDesc>
+                            <xsl:for-each select="current-group()">
+                                <xsl:apply-templates select="."/>
+                            </xsl:for-each>
+                        </msDesc>
+                    </xsl:when>
+                    <xsl:when test="name()='pCommentary'">
+                        <note type="commentary">
+                            <xsl:for-each select="current-group()">
+                                <xsl:apply-templates select="."/>
+                            </xsl:for-each>
+                        </note>
+                    </xsl:when>
+                    <xsl:when test="name()='pBibl'">
+                        <xsl:for-each select="current-group()">
+                            <xsl:apply-templates select="."/>
+                        </xsl:for-each>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:for-each select="current-group()">
+                            <xsl:apply-templates select="."/>
+                        </xsl:for-each>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each-group>
+        </xsl:copy>
     </xsl:template>
 
+    <xsl:template match="tei:pAbstract">
+        <p>
+            <xsl:apply-templates select="@* | node()"/>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="tei:pOrig">
+        <p>
+            <xsl:apply-templates select="@* | node()"/>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="tei:pArchival">
+        <p>
+            <xsl:apply-templates select="@* | node()"/>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="tei:pCommentary">
+        <p>
+            <xsl:apply-templates select="@* | node()"/>
+        </p>
+    </xsl:template>
+
+    <xsl:template match="tei:pBibl">
+        <bibl>
+            <xsl:apply-templates select="@* | node()"/>
+        </bibl>
+    </xsl:template>
 
     <!-- Default: keep as it is -->
 

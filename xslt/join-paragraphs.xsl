@@ -63,12 +63,13 @@
     </xsl:template>-->
 
     <xsl:template match="tei:div">
-        <div>
+        <xsl:copy>
+            <xsl:apply-templates select="@*"/>
             <xsl:for-each-group select="*"
                     group-starting-with="tei:p[not(contains(@type, 'continued'))]">
                 <xsl:apply-templates select="." mode="group"/>
             </xsl:for-each-group>
-        </div>
+        </xsl:copy>
     </xsl:template>
 
     <xsl:template match="tei:p[not(contains(@type, 'continued'))]" mode="group">

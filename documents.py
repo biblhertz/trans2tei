@@ -74,6 +74,10 @@ if __name__ == '__main__':
     print(xml_data, file=open("temp/hyph.xml", 'w'))
 
     print(xml_data, file=open("temp/rep2.xml", "w"))
+
+    xml_data = transform.disconnect_style_and_type(xml_data)
+    print(xml_data, file=open("temp/style.xml", "w"))
+
     xml_data = transform.collect_blocks(xml_data)
 
     # TODO tabs
