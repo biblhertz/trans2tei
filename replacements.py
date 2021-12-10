@@ -114,7 +114,7 @@ def join_cursive_text(xml_data):
     """
     Join i elements (replacements for hi[@rendition='#i'] that are interrupted by milestone breaks
     """
-    return re.sub(r'(</i>)(\s*)((?:<pb [^<>]+/>)?)(\s*)(<lb [^<>]+/>)(\s*)(<i>)', r'\2\3\4\5\6', xml_data)
+    return re.sub(r'</i>(¬?\s*(?:<pb [^<>]+/>)?\s*<lb [^<>]+/>\s*)<i>', r'\1', xml_data)
 
 
 def footnote_numbers(xml_data):
@@ -160,7 +160,7 @@ def join_small_caps(xml_data):
     """
     Join k elements (replacements for hi[@rendition='#k'] that are interrupted by milestone breaks
     """
-    return re.sub(r'(</k>)(\s*)((?:<pb [^<>]+/>)?)(\s*)(<lb [^<>]+/>)(\s*)(<k>)', r'\2\3\4\5\6', xml_data)
+    return re.sub(r'</k>(¬?\s*(?:<pb [^<>]+/>)?\s*<lb [^<>]+/>\s*)<k>', r'\1', xml_data)
 
 
 def first_paragraph(xml_data):
