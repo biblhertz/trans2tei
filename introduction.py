@@ -70,6 +70,17 @@ if __name__ == '__main__':
     xml_data = transform.join_paragraphs(xml_data)
     print(xml_data, file=open("temp/rep1.xml", "w"))
 
+    # join hi #i and #k
+    xml_data = transform.simplify_hi(xml_data)
+    print(xml_data, file=open("temp/hi1.xml", "w"))
+
+    xml_data = replacements.join_small_caps(xml_data)
+    xml_data = replacements.join_cursive_text(xml_data)
+    print(xml_data, file=open("temp/hi2.xml", "w"))
+
+    xml_data = transform.expand_hi(xml_data)
+    print(xml_data, file=open("temp/hi.xml", "w"))
+
     xml_data = replacements.replace_hyphens(xml_data)
     print(xml_data, file=open("temp/hyph.xml", 'w'))
 

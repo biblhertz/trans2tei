@@ -47,6 +47,16 @@ def collect_blocks(xml_data):
     return base(xml_data, stylesheet)
 
 
+def simplify_hi(xml_data):
+    stylesheet = "xslt/simplify-hi.xsl"
+    return base(xml_data, stylesheet)
+
+
+def expand_hi(xml_data):
+    stylesheet = "xslt/expand-hi.xsl"
+    return base(xml_data, stylesheet)
+
+
 def id_to_div(xml_data):
     stylesheet = "xslt/id-to-div.xsl"
     return base(xml_data, stylesheet)
