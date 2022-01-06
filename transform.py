@@ -61,6 +61,16 @@ def id_to_div(xml_data):
     stylesheet = "xslt/id-to-div.xsl"
     return base(xml_data, stylesheet)
 
+
+def bibliography_elements(xml_data):
+    stylesheet = "xslt/bibliography.xsl"
+    return base(xml_data, stylesheet)
+
+
+def woelfflin_elements(xml_data):
+    stylesheet = "xslt/woelfflin-elements.xsl"
+    return base(xml_data, stylesheet)
+
 #
 # Tabulatori per prezzi allineati a destra
 # ⁅ ⁆

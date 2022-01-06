@@ -113,6 +113,7 @@
             <xsl:when test="@type = 'paragraph-truncated'">paragraph</xsl:when>
             <xsl:when test="@type = 'paragraph-first-truncated'">first</xsl:when>
             <xsl:when test="@type = 'paragraph-noindent-truncated'">paragraph-noindent</xsl:when>
+            <xsl:when test="@type = 'bibref'">bibref</xsl:when>
             <xsl:when test="not(@type)">paragraph</xsl:when>
             <xsl:otherwise><xsl:value-of select="@type"/></xsl:otherwise>
         </xsl:choose>

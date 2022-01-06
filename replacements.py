@@ -208,6 +208,88 @@ def move_pb_into_div2(xml_data):
     return re.sub(r'(<pb facs="#facs_[0-9]+".*? />\s*<fw.*?>\s*.*?</fw>\s*)(</div>\s*<div>\s*)', r'\2\1', xml_data)
 
 
+def bibl_label(xml_data):
+    """
+    Encase the label for bibliographic entries
+
+    :param xml_data:
+    :return:
+    """
+
+    return re.sub(r'(<bibl [^<>]*>\s*<lb [^<>]*/>)((?:<lb [^<>]*/>|<pb [^<>]*/>|[^()<>:])+ \((?:<lb [^<>]*/>|<pb [^<>]*/>|[^()<>:])+\)):', r'\1<title type="short">\2</title>:', xml_data)
+
+
+def bibl_author(xml_data):
+    """
+    Encase the label for bibliographic entries
+
+    :param xml_data:
+    :return:
+    """
+    xml_data = re.sub(r'(</title[^<>]*>:)' +  # end of short title
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'(\w(?:<lb [^<>]*/>|<pb [^<>]*/>|[^<>,:])+\w)' +  # name
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)+and(?:<lb [^<>]*/>|<pb [^<>]*/>|\s)+)'  # space, 'and', space
+                      r'(\w(?:<lb [^<>]*/>|<pb [^<>]*/>|[^<>,:])+\w),' +  # name
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'(<title|‘)',  # start of monography title or article title
+                      r'\1\2<author>\3</author>\4<author>\5</author>,\6\7', xml_data)
+
+    xml_data = re.sub(r'(</title[^<>]*>:)' +  # end of short title
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'(\w(?:<lb [^<>]*/>|<pb [^<>]*/>|[^<>,:])+\w)' +   # name
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)+et(?:<lb [^<>]*/>|<pb [^<>]*/>|\s)+al\.,)'  # 'et al.' incl. spaces
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'(<title|‘)',  # start of monography title or article title
+                      r'\1\2<author>\3</author>\4\5\6', xml_data)
+
+    xml_data = re.sub(r'(</title[^<>]*>:)' +  # end of short title
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'(\w(?:<lb [^<>]*/>|<pb [^<>]*/>|[^<>,:])+\w),' +  # name
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'(<title|‘)',  # start of monography title or article title
+                      r'\1\2<author>\3</author>,\4\5', xml_data)
+    return xml_data
+
+
+def bibl_pub(xml_data):
+    """
+    Encase the label for bibliographic entries
+
+    :param xml_data:
+    :return:
+    """
+
+    xml_data = re.sub(r'(\()' +  # opening bracket
+                      r'((?:[A-Z](?:<lb [^<>]*/>|<pb [^<>]*/>|[^<>,:])+)?)' +  # place name
+                      r'(,?)' +  # comma
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'([0-9\-]+)' +  # date
+                      r'(\)[^<])',  # closing bracket that is not followed by a closing tag
+                      r'\1<pubPlace>\2</pubPlace>\3\4<date>\5</date>\6', xml_data)
+    xml_data = re.sub(r'<pubPlace></pubPlace>', r'', xml_data)
+    return xml_data
+
+
+def bibl_article(xml_data):
+    """
+    Encase the article name for bibliographic entries
+
+    :param xml_data:
+    :return:
+    """
+
+    xml_data = re.sub(r'</author>,' +  # opening bracket
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'‘' +  # opening quote
+                      r'((?:[A-Z](?:<lb [^<>]*/>|<pb [^<>]*/>|[^<>,:])+)?)' +  # name
+                      r'(?: ,|’,)' +  # comma
+                      r'((?:<lb [^<>]*/>|<pb [^<>]*/>|\s)*)' +  # spaces
+                      r'in',  # spaces
+                      r'</author>,\1<title level="a" rendition="#singlequote">\2</title>,\3in', xml_data)
+    return xml_data
+
+
 def unite_footnotes(xml_data):
     """
     Uniamo le footnotes continued!!!
