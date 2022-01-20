@@ -10,7 +10,7 @@ Walkthrough for the conversion of Woelfflins Gedanken zur Kunstgeschichte
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input', '-i', dest="infile_name", help='Path to mets.xml for input', default="export_job_2242759/691986/Wölfflin_1941_Gedanken/mets.xml")
+    parser.add_argument('--input', '-i', dest="infile_name", help='Path to mets.xml for input', default="exports/Wölfflin_1941_Gedanken/mets.xml")
     parser.add_argument('--output', '-o', dest="outfile_name", help='Path to output file', default="no-outfile-specified-gedanken.xml")
 
     args = parser.parse_args()
@@ -64,8 +64,18 @@ if __name__ == '__main__':
     xml_data = transform.join_paragraphs(xml_data)
     print(xml_data, file=open("temp/rep1.xml", "w"))
 
+    # join hi #i and #k
+    xml_data = transform.simplify_hi(xml_data)
+    xml_data = replacements.join_small_caps(xml_data)
+    xml_data = replacements.join_cursive_text(xml_data)
+    xml_data = transform.expand_hi(xml_data)
+    print(xml_data, file=open("temp/hi.xml", "w"))
+
     xml_data = replacements.replace_hyphens(xml_data)
     print(xml_data, file=open("temp/hyph.xml", 'w'))
+
+    xml_data = transform.woelfflin_elements(xml_data)
+    print(xml_data, file=open("temp/woe.xml", 'w'))
     # TODO tabs
 
     with open(args.outfile_name, "w") as outfile:
