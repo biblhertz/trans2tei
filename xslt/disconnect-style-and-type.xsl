@@ -66,6 +66,13 @@
         </pOrig>
     </xsl:template>
 
+    <xsl:template match="tei:p[@type='poetry']">
+        <pOrig type="poetry">
+            <xsl:apply-templates select="@facs"/>
+            <xsl:apply-templates/>
+        </pOrig>
+    </xsl:template>
+
     <xsl:template match="tei:p[@type='archival-notice']">
         <pArchival rend="noindent">
             <xsl:apply-templates select="@facs"/>

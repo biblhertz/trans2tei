@@ -66,6 +66,28 @@
         </p>
     </xsl:template>
 
+    <xsl:template match="tei:pOrig[@type='poetry']">
+        <lg>
+            <xsl:apply-templates select="@* except @type"/>
+            <xsl:for-each-group select="node()" group-starting-with="tei:lb">
+                <xsl:choose>
+                    <xsl:when test="normalize-space(string-join(current-group(), '')) = ''"/>
+                    <xsl:when test="name() != 'lb'">
+                        <l>
+                            <xsl:apply-templates select="current-group()"/>
+                        </l>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <l>
+                            <xsl:apply-templates select="@*"/>
+                            <xsl:apply-templates select="current-group() except ."/>
+                        </l>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xsl:for-each-group>
+        </lg>
+    </xsl:template>
+
     <xsl:template match="tei:pOrig">
         <p>
             <xsl:apply-templates select="@* | node()"/>
