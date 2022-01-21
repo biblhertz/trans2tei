@@ -91,7 +91,7 @@ def unite_doc_nubmer_and_title(xml_data):
     # group 2: document number from document title
     # group 3: attribute @facs from head
     # group 4: date from document title
-    replacement = r'</div>\n<div>\n<head \1 name="\2">\2\n<lb \3 /><hi rendition="#g">\4</hi></head>'
+    replacement = r'</div>\n<div>\n<head \1 name="\2"><num>\2</num>\n<lb \3 /><hi rendition="#g">\4</hi></head>'
 
     # without lb
     pattern = r'<p (facs="#facs_.*?") type="document_number"> (.*?)</p>\s*</div>\s*<div>\s*<head (facs.*?")>(.*?)</head>'
@@ -138,7 +138,7 @@ def footnotes(xml_data):
     """
 
     xml_data = re.sub(r'⊤([0-9]+)⊥',
-                      r'<hi rendition="sup">\1</hi>',
+                      r'<hi rendition="#sup">\1</hi>',
                       xml_data)
 
     return xml_data
