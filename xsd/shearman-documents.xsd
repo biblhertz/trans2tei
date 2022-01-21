@@ -1,0 +1,477 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xml="http://www.w3.org/XML/1998/namespace"
+           xmlns:tei="http://www.tei-c.org/ns/1.0"
+           targetNamespace="http://www.tei-c.org/ns/1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+
+    <xs:element name="TEI">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="teiHeader">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:any processContents="skip"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="text">
+                    <xs:complexType>
+                        <xs:sequence>
+
+                            <xs:element name="body" minOccurs="1" maxOccurs="1">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element ref="tei:div" maxOccurs="unbounded"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="version" type="xs:string"/>
+            <xs:attribute name="n">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="\d\d\.02"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- generic type of comments -->
+
+
+    <xs:element name="div">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:head" maxOccurs="1"/>
+                <xs:element ref="tei:argument" minOccurs="1"/>
+                <xs:element ref="tei:ab" minOccurs="0"/>
+                <xs:element ref="tei:p" minOccurs="0"/>
+                <xs:element ref="tei:ref" minOccurs="0"/>
+                <xs:element ref="tei:div" minOccurs="0"/>
+                <xs:element ref="tei:dateline" minOccurs="0"/>
+                <xs:element ref="tei:signed" minOccurs="0"/>
+                <xs:element ref="tei:quote" minOccurs="0"/>
+                <xs:element ref="tei:list" minOccurs="0"/>
+                <xs:element ref="tei:figure" minOccurs="0"/>
+                <xs:element ref="tei:lg" minOccurs="0"/>
+                <xs:element ref="tei:pb" minOccurs="0"/>
+                <xs:element ref="tei:note" minOccurs="0"/>
+                <xs:element ref="tei:bibl" minOccurs="0"/>
+                <xs:element ref="tei:msDesc" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute ref="xml:id" use="required"/>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="document"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="note">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:p" minOccurs="1"/>
+                <xs:element ref="tei:lg" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute ref="xml:id" use="optional"/>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="commentary"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="bibl" type="tei:paragraphLike"/>
+
+    <xs:complexType mixed="true" name="paragraphLike">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element ref="tei:hi" minOccurs="0"/>
+            <xs:element ref="tei:ref" minOccurs="0"/>
+            <xs:element ref="tei:bibl" minOccurs="0"/>
+            <xs:element ref="tei:figure" minOccurs="0"/>
+            <xs:element ref="tei:lg" minOccurs="0"/>
+            <xs:element ref="tei:ptr" minOccurs="0"/>
+            <xs:element ref="tei:foreign" minOccurs="0"/>
+            <xs:element ref="tei:lb" minOccurs="0"/>
+            <xs:element ref="tei:pb" minOccurs="0"/>
+            <xs:element name="del" minOccurs="0"/>
+            <xs:element name="add" minOccurs="0"/>
+            <xs:element name="note" minOccurs="0">
+                <xs:complexType>
+                    <xs:choice maxOccurs="unbounded">
+                        <xs:element ref="tei:lb" minOccurs="0"/>
+                        <xs:element ref="tei:hi" minOccurs="0"/>
+                    </xs:choice>
+                    <xs:attribute name="place">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="foot"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="facs"/>
+                    <xs:attribute ref="xml:id"/>
+                    <xs:attribute name="n"/>
+                </xs:complexType>
+            </xs:element>
+        </xs:choice>
+        <xs:attribute ref="xml:id" use="optional"/> <!-- Fixme to be changed -->
+        <xs:attribute name="rendition" type="tei:renditionType"/>
+        <xs:attribute name="rend" type="xs:string" use="optional"/>
+        <xs:attribute name="facs" use="optional">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="#facs_\d+_(r|TextRegion|region)_\d+_\d+"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:element name="p" type="tei:paragraphLike"/>
+
+    <xs:element name="quote">
+        <xs:complexType>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:p" minOccurs="0"/>
+                <xs:element ref="tei:lg" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="type" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="argument">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tei:p" minOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="msDesc">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="tei:p" minOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="paragraphLikeSimple" mixed="true">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element ref="tei:hi" minOccurs="0"/>
+            <xs:element ref="tei:note" minOccurs="0"/>
+            <xs:element ref="tei:ref" minOccurs="0"/>
+        </xs:choice>
+        <xs:attribute ref="xml:id" use="required"/>
+            <xs:attribute name="rendition" type="tei:renditionType"/>
+    </xs:complexType>
+
+    <xs:element name="dateline" type="tei:paragraphLikeSimple"/>
+
+    <xs:element name="signed" type="tei:paragraphLikeSimple"/>
+
+    <xs:element name="figure">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element name="graphic">
+                    <xs:complexType>
+                        <xs:attribute name="url" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="tei:head"/>
+            </xs:sequence>
+            <xs:attribute ref="xml:id" use="required"/>
+            <xs:attribute name="rendition" type="tei:renditionType"/>
+            <xs:attribute name="place">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="inline"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="list">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:element ref="tei:item" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="item">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:label" minOccurs="0"/>
+                <xs:element ref="tei:list" minOccurs="0"/>
+                <xs:element ref="tei:seg" minOccurs="0"/>
+                <xs:element ref="tei:note" minOccurs="0"/>
+                <xs:element ref="tei:lb" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="rendition" type="tei:renditionType"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- simple tags -->
+    <xs:element name="ref">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+            </xs:sequence>
+            <xs:attribute name="target" type="xs:anyURI" use="required"/>
+            <xs:attribute name="type" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="page"/>
+                        <xs:enumeration value="comment"/>
+                        <xs:enumeration value="footnote"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ptr">
+        <xs:complexType>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="new image position"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="target" type="xs:anyURI" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="head">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="num" minOccurs="0"/>
+                <xs:element ref="tei:lb" minOccurs="0"/>
+                <xs:element ref="tei:note" minOccurs="0"/>
+                <xs:element ref="tei:hi" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="rendition" type="tei:renditionType" use="optional"/>
+            <xs:attribute name="name" type="xs:string" use="optional"/>
+
+            <xs:attribute name="facs" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="#facs_\d+_(r|TextRegion|region)_\d+_\d+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="lg">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="l" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType mixed="true">
+                        <xs:choice maxOccurs="unbounded">
+                            <xs:element ref="tei:hi" minOccurs="0"/>
+                        </xs:choice>
+                        <xs:attribute name="n" type="xs:string" use="optional"/>
+                        <xs:attribute name="facs" type="xs:string" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="facs" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="#facs_\d+_(r|TextRegion|region)_\d+_\d+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="l" type="tei:paragraphLike"/>
+
+    <xs:element name="hi">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:hi" minOccurs="0"/>
+                <xs:element ref="tei:lb" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="rendition" type="tei:renditionType" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="rs">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:note" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="type" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="person"/>
+                        <xs:enumeration value="place"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="foreign">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:note" minOccurs="0"/>
+                <xs:element ref="tei:ref" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute ref="xml:lang" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="seg">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:note" minOccurs="0"/>
+                <xs:element ref="tei:ref" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="rendition" type="tei:renditionType"/>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="label">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:note" minOccurs="0"/>
+                <xs:element ref="tei:ref" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="rendition" type="tei:renditionType"/>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ab">
+        <xs:complexType mixed="true">
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="tei:note" minOccurs="0"/>
+                <xs:element ref="tei:lb" minOccurs="0"/>
+            </xs:choice>
+            <xs:attribute name="rendition" type="tei:renditionType"/>
+            <xs:attribute name="type">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value=".+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="pb">
+        <xs:complexType>
+            <xs:attribute ref="xml:id" use="required"/>
+            <xs:attribute name="n" use="required"/>
+            <xs:attribute name="facs" type="xs:string" use="optional"/>
+            <xs:attribute name="break" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="no"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="lb">
+        <xs:complexType>
+            <xs:attribute name="n" type="xs:string" use="optional"/>
+            <xs:attribute name="break" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="no"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="facs" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="#facs_\d+_tl_\d+"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="rend" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="hyphen"/>
+                        <xs:enumeration value="nohyphen"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="supplied">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="gap">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- attributes -->
+    <xs:simpleType name="renditionType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="#aq"/>
+            <xs:enumeration value="#b"/>
+            <xs:enumeration value="#blue"/>
+            <xs:enumeration value="#c"/>
+            <xs:enumeration value="#indent"/>
+            <xs:enumeration value="#et"/>
+            <xs:enumeration value="#et2"/>
+            <xs:enumeration value="#et3"/>
+            <xs:enumeration value="#f"/>
+            <xs:enumeration value="#fr"/>
+            <xs:enumeration value="#g"/>
+            <xs:enumeration value="#i"/>
+            <xs:enumeration value="#in"/>
+            <xs:enumeration value="#k"/>
+            <xs:enumeration value="#larger"/>
+            <xs:enumeration value="#red"/>
+            <xs:enumeration value="#right"/>
+            <xs:enumeration value="#s"/>
+            <xs:enumeration value="#smaller"/>
+            <xs:enumeration value="#sub"/>
+            <xs:enumeration value="#sup"/>
+            <xs:enumeration value="#u"/>
+            <xs:enumeration value="#uu"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
