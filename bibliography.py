@@ -92,6 +92,9 @@ if __name__ == '__main__':
     print(xml_data, file=open("temp/biblarticle.xml", 'w'))
     # TODO tabs
 
+    xml_data = transform.indent(xml_data)
+    print(xml_data, file=open("temp/ind.xml", 'w'))
+
     with open(args.outfile_name, "w") as outfile:
         outfile.write(xml_data)
     outfile.close()

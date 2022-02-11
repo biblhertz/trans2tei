@@ -71,6 +71,10 @@ def woelfflin_elements(xml_data):
     stylesheet = "xslt/woelfflin-elements.xsl"
     return base(xml_data, stylesheet)
 
+def indent(xml_data):
+    stylesheet = "xslt/indent.xsl"
+    return base(xml_data, stylesheet)
+
 #
 # Tabulatori per prezzi allineati a destra
 # ⁅ ⁆

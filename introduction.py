@@ -22,14 +22,6 @@ if __name__ == '__main__':
     xml_data = transform.page2tei(args.infile_name)
     print(xml_data, file=open("temp/tei.xml", 'w'))
 
-    # After grouping by headings, the document number is at the end of the previous paragraph which we do not want.
-    # Move it into the `head` elements:
-    xml_data = replacements.unite_doc_nubmer_and_title(xml_data)
-    print(xml_data, file=open("temp/num.xml", 'w'))
-
-    xml_data = transform.id_to_div(xml_data)
-    print(xml_data, file=open("temp/docid.xml", 'w'))
-
     # Text in italics is tagged in plain text with integrals. Replace with according tags.
     xml_data = replacements.cursive_text(xml_data)
     print(xml_data, file=open("temp/cur.xml", 'w'))
@@ -85,6 +77,9 @@ if __name__ == '__main__':
     print(xml_data, file=open("temp/hyph.xml", 'w'))
 
     # TODO tabs
+
+    xml_data = transform.indent(xml_data)
+    print(xml_data, file=open("temp/ind.xml", 'w'))
 
     with open(args.outfile_name, "w") as outfile:
         outfile.write(xml_data)
