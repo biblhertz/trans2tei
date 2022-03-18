@@ -343,21 +343,6 @@
                 <ns3:file ID="PAGEXML_718" SEQ="718" MIMETYPE="application/xml" CREATED="2021-11-26T10:13:14.000+01:00" CHECKSUM="" CHECKSUMTYPE="MD5">
                     <ns3:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="FILE" ns2:type="simple" ns2:href="page/Shearman-2-0718.xml"/>
                 </ns3:file>
-                <ns3:file ID="PAGEXML_719" SEQ="719" MIMETYPE="application/xml" CREATED="2021-11-26T10:13:14.000+01:00" CHECKSUM="" CHECKSUMTYPE="MD5">
-                    <ns3:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="FILE" ns2:type="simple" ns2:href="page/Shearman-2-0719.xml"/>
-                </ns3:file>
-                <ns3:file ID="PAGEXML_720" SEQ="720" MIMETYPE="application/xml" CREATED="2021-11-26T10:13:14.000+01:00" CHECKSUM="" CHECKSUMTYPE="MD5">
-                    <ns3:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="FILE" ns2:type="simple" ns2:href="page/Shearman-2-0720.xml"/>
-                </ns3:file>
-                <ns3:file ID="PAGEXML_721" SEQ="721" MIMETYPE="application/xml" CREATED="2021-11-26T10:13:14.000+01:00" CHECKSUM="" CHECKSUMTYPE="MD5">
-                    <ns3:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="FILE" ns2:type="simple" ns2:href="page/Shearman-2-0721.xml"/>
-                </ns3:file>
-                <ns3:file ID="PAGEXML_722" SEQ="722" MIMETYPE="application/xml" CREATED="2021-11-26T10:13:14.000+01:00" CHECKSUM="" CHECKSUMTYPE="MD5">
-                    <ns3:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="FILE" ns2:type="simple" ns2:href="page/Shearman-2-0722.xml"/>
-                </ns3:file>
-                <ns3:file ID="PAGEXML_723" SEQ="723" MIMETYPE="application/xml" CREATED="2021-11-26T10:13:14.000+01:00" CHECKSUM="" CHECKSUMTYPE="MD5">
-                    <ns3:FLocat LOCTYPE="OTHER" OTHERLOCTYPE="FILE" ns2:type="simple" ns2:href="page/Shearman-2-0723.xml"/>
-                </ns3:file>
             </ns3:fileGrp>
         </ns3:fileGrp>
     </ns3:fileSec>
