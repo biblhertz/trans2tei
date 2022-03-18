@@ -44,6 +44,9 @@ if __name__ == '__main__':
     xml_data = replacements.document_links(xml_data)
     print(xml_data, file=open("temp/link.xml", 'w'))
 
+    xml_data = replacements.bold_text(xml_data)
+    print(xml_data, file=open("temp/bold.xml", 'w'))
+
     xml_data = replacements.move_pb_into_div1(xml_data)
     print(xml_data, file=open("temp/pb1.xml", 'w'))
 

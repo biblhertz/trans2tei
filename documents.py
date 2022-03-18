@@ -30,6 +30,10 @@ if __name__ == '__main__':
     xml_data = transform.id_to_div(xml_data)
     print(xml_data, file=open("temp/docid.xml", 'w'))
 
+    # supplied
+    xml_data = replacements.supplied(xml_data)
+    print(xml_data, file=open("temp/supp.xml", 'w'))
+
     # Text in italics is tagged in plain text with integrals. Replace with according tags.
     xml_data = replacements.cursive_text(xml_data)
     print(xml_data, file=open("temp/cur.xml", 'w'))
@@ -51,6 +55,9 @@ if __name__ == '__main__':
 
     xml_data = replacements.document_links(xml_data)
     print(xml_data, file=open("temp/link.xml", 'w'))
+
+    xml_data = replacements.bold_text(xml_data)
+    print(xml_data, file=open("temp/bold.xml", 'w'))
 
     xml_data = replacements.move_pb_into_div1(xml_data)
     print(xml_data, file=open("temp/pb1.xml", 'w'))
