@@ -41,11 +41,12 @@ Create a new document in Transkribus by uploading the images and filing the need
 4. Manually correct a set of pages (minumun to be set, depends on complexity of document)
 ## Document export and conversion
 - Export document as Transkribus page (save it locally)
-- Process it with Page2Tei
-- Substitute tag symbols in text with corresponding xml tags
-- Fix notes, page numbers etc. (xslt)
+- Process it with a transformation cascade from this project, taking care of
+  - Transformation with Page2Tei
+  - Substitute tag symbols in text with corresponding xml tags
+  - Fix notes, page numbers etc. (xslt)
 ### Publish final document
-- create final tei document for teipublisher
+- create final tei document for teipublisher (manual fixes, re-combination of parts, etc.)
 - export to word docx for editorial/commmentary workflow
 - word processing for tei export -> see Reto
 END
