@@ -16,19 +16,19 @@ string replacements and XSLT transformations.
 - `out/`: Default output folder
 - `xsd/`: Validation for the documents in REMS
 - `xslt/`: Stylesheets
-    - `bibliography.xsl`: 
-    - `checkpara.xsl`
-    - `collect-blocks.xsl`
-    - `disconnect-style-and-type.xsl`
-    - `expand-hi.xsl`
-    - `id-to-div.xsl`
-    - `indent.xsl`
-    - `join-paragraphs.xsl`
-    - `move-footnotes.xsl`
-    - `page2tei-0.xsl`
-    - `page-numbers.xsl`
-    - `simplify-hi.xsl`
-    - `string-pack.xsl`
+    - `bibliography.xsl`: Turn list entries into bibliography entries and mark monograph titles
+    - `checkpara.xsl`: Testing: Check for paragraph types in unexpected context
+    - `collect-blocks.xsl`: Apply standardized blocks for REMS documents
+    - `disconnect-style-and-type.xsl`: Merge tags that just differ by layout but keep layout information (REMS documents)
+    - `expand-hi.xsl`: Use `hi` and types instead of different elements for markup
+    - `id-to-div.xsl`: Add ID to REMS documents
+    - `indent.xsl`: Pretty print
+    - `join-paragraphs.xsl`: Join paragraphs across page breaks
+    - `move-footnotes.xsl`: Move footnotes from page end to the footnote mark
+    - `page2tei-0.xsl`: Transformation into TEI
+    - `page-numbers.xsl`: Set page number as attribute in page breaks
+    - `simplify-hi.xsl`: Turn `hi` into elements without attributes to join the across line breaks
+    - `string-pack.xsl`: See page2tei
     - `woelfflin-elements.xsl`: Replacement of TEI elements to match the flavour of the project
 - `bibliography.py`: Cascade of operations for the bibliography in REMS
 - `documents.py`: Cascade of operations for the main parts in REMS
