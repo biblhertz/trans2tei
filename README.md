@@ -28,6 +28,8 @@ string replacements and XSLT transformations.
   - `move-footnotes.xsl`: Move footnotes from page end to the footnote mark
   - `page-numbers.xsl`: Set page number as attribute in page breaks
   - `postprocess-page2tei.xsl`: Processing of additional styles in the same way as page2tei
+  - `remove-lb.xsl`: Remove linebreaks in insignificant position
+  - `remove-pb.xsl`: Remove pagebreaks without numbers
   - `remove-position-data.xsl`: Remove the element `facsimile` from the xml
   - `simplify-hi.xsl`: Turn `hi` into elements without attributes to join the across line breaks
   - `string-pack.xsl`: See page2tei
@@ -37,6 +39,7 @@ string replacements and XSLT transformations.
 - `gedanken.py`: Cascade of operations for Heinrich Wölfflins «Gedanken zur Kunstgeschichte» (1941)
 - `introduction.py`: Cascade of operations for the introduction of REMS, and any text without special markup
 - `replacements.py`: Replacements using regular expressions as catalog of functions
+- `simplify.py`: Cascade of operations for a simple TEI document
 - `transform.py`: XSLT transformations as catalog of functions
 - `workflow.md`: Step by step description of the workflows
 
