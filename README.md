@@ -2,7 +2,7 @@
 
 Workflow for creating structured tei documents from Transkribus layout+text recognition
 
-This project is based on [page2tei](https://github.com/dariok/page2tei) bei Dario Kampkaspar and extended with several waves of
+This project is based on [page2tei](https://github.com/dariok/page2tei) by Dario Kampkaspar and extended with several waves of
 string replacements and XSLT transformations.
 
 ## Structure of this project
