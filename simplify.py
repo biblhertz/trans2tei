@@ -21,6 +21,12 @@ if __name__ == '__main__':
     # Transformation to TEI. This should already join footnotes from different pages.
     xml_data = transform.page2tei(args.infile_name)
     print(xml_data, file=open("temp/tei.xml", 'w'))
+    
+    xml_data = transform.postprocess_page2tei(xml_data)
+    print(xml_data, file=open("temp/tei-post.xml", "w"))
+    
+    xml_data = transform.remove_position_data(xml_data)
+    print(xml_data, file=open("temp/positions.xml", "w"))
 
     # Text in italics is tagged in plain text with integrals. Replace with according tags.
     xml_data = replacements.cursive_text(xml_data)
