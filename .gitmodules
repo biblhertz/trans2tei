@@ -1,0 +1,3 @@
+[submodule "page2tei"]
+	path = page2tei
+	url = https://github.com/dariok/page2tei.git

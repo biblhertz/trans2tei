@@ -15,11 +15,21 @@ def base(xml_data, stylesheet):
 
 
 def page2tei(input_file):
-    stylesheet = "xslt/page2tei-0.xsl"
+    stylesheet = "page2tei/page2tei-0.xsl"
     command = ["java", "-jar", SAXON_JAR, "-xsl:{}".format(stylesheet), "-s:{}".format(input_file)]
     p = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     output = p.communicate()[0]
     return output.decode()
+
+
+def postprocess_page2tei(xml_data):
+    stylesheet = "xslt/postprocess-page2tei.xsl"
+    return base(xml_data, stylesheet)
+
+
+def remove_position_data(xml_data):
+    stylesheet = "xslt/remove-position-data.xsl"
+    return base(xml_data, stylesheet)
 
 
 def join_paragraphs(xml_data):

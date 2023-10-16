@@ -19,8 +19,11 @@ if __name__ == '__main__':
     print(args.infile_name)
 
     # Transformation to TEI. This should already join footnotes from different pages.
-    xml_data = transform.page2tei(args.infile_name)
-    print(xml_data, file=open("temp/tei.xml", 'w'))
+    xml_data = transform.postprocess_page2tei(xml_data)
+    print(xml_data, file=open("temp/tei-post.xml", "w"))
+    
+    xml_data = transform.remove_position_data(xml_data)
+    print(xml_data, file=open("temp/positions.xml", "w"))
 
     # After grouping by headings, the document number is at the end of the previous paragraph which we do not want.
     # Move it into the `head` elements:
