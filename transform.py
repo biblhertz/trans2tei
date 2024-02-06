@@ -85,6 +85,14 @@ def indent(xml_data):
     stylesheet = "xslt/indent.xsl"
     return base(xml_data, stylesheet)
 
+def remove_lb(xml_data):
+    stylesheet = "xslt/remove-lb.xsl"
+    return base(xml_data, stylesheet)
+
+def remove_pb(xml_data):
+    stylesheet = "xslt/remove-pb.xsl"
+    return base(xml_data, stylesheet)
+
 #
 # Tabulatori per prezzi allineati a destra
 # ⁅ ⁆
