@@ -44,9 +44,6 @@ if __name__ == '__main__':
     xml_data = replacements.small_caps(xml_data)
     print(xml_data, file=open("temp/scap.xml", 'w'))
 
-    xml_data = replacements.first_paragraph(xml_data)
-    print(xml_data, file=open("temp/para.xml", 'w'))
-
     xml_data = replacements.document_links(xml_data)
     print(xml_data, file=open("temp/link.xml", 'w'))
 
